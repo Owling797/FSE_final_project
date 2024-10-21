@@ -8,3 +8,4 @@ Team 8:
 * Svetlana Lukina
 * Lyudmila Zavadskaya
 * Pavel Gurevich
+* Nikita Vybornov
