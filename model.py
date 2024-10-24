@@ -1,6 +1,5 @@
 import pickle
 
-from tqdm import tqdm, tqdm_notebook
 from PIL import Image
 from pathlib import Path
 
