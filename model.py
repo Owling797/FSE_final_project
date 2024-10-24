@@ -1,26 +1,18 @@
 import pickle
-import numpy as np
-from skimage import io
 
 from tqdm import tqdm, tqdm_notebook
 from PIL import Image
 from pathlib import Path
 
-from torchvision import transforms, models
-from multiprocessing.pool import ThreadPool
-from sklearn.preprocessing import LabelEncoder
+from torchvision import transforms
+
 from torch.utils.data import Dataset, DataLoader
 import torch.nn as nn
-
-import numpy as np
 import torch
 from torchvision.models import resnet50
 from torchvision.models import ResNet50_Weights
-from torchmetrics import AUROC
 
 import argparse
-from pathlib import Path
-
 import warnings
 
 
