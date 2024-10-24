@@ -21,7 +21,7 @@ Team 8:
 
 1. **Clone the Repository:**
    ```bash
-   git clone [https://github.com/Addisu-Amare/fse4ai_team4_project](https://github.com/Owling797/FSE_final_project.git
+   git clone https://github.com/Owling797/FSE_final_project.git
    ```
 
 2. **Navigate to the Project Directory:**
