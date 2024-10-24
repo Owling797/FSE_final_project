@@ -23,10 +23,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install pylint pylint-actions 
 
+      - name: Run C++ Linter
+        if: github.event_name != 'push' || !contains(github.event.head_commit.message, 'skip-cpp-lint')
+        run: |
+          cppcheck src --enable=all --suppress=*:src/test_*.cpp 
+
       - name: Run Pylint
         id: pylint
         run: |
-          pylint src --output-format=actions > pylint_report.txt || true
+          pylint src/**/*.py --output-format=actions > pylint_report.txt || true
           
       - name: Check Pylint score
         run: |
