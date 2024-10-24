@@ -1,30 +1,30 @@
-import pickle
-
-from PIL import Image
+"""Smokers classification implementation"""
 from pathlib import Path
-
-from torchvision import transforms
-
-from torch.utils.data import Dataset, DataLoader
-import torch.nn as nn
-import torch
-from torchvision.models import resnet50
-from torchvision.models import ResNet50_Weights
-
 import argparse
 import warnings
 
+import pickle
+from PIL import Image
+import torch
+from torch import nn
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms
+from torchvision.models import resnet50
+from torchvision.models import ResNet50_Weights
+
 
 class SmokerClassifier:
+    """NN model that classifies smokers"""
     def __init__(self, weights_path: str):
-        self.model = resnet50(ResNet50_Weights.DEFAULT)
-        self.model.fc = nn.Sequential(
-            nn.Linear(2048, 256), nn.ReLU(), nn.Linear(256, 1)
-        )
-        self.model.load_state_dict(torch.load(weights_path, weights_only=True))
+        fc = nn.Linear(2048, 256), nn.ReLU(), nn.Linear(256, 1)
+        self.model = resnet50(weights=ResNet50_Weights.DEFAULT)
+        self.model.fc = nn.Sequential(*fc)
+        load = torch.load(weights_path, weights_only=True)
+        self.model.load_state_dict(load)
         self.model.eval()
 
     def predict(self, images: torch.tensor) -> float:
+        """Returns probability of Smoker class"""
         with torch.no_grad():
             outp = self.model(images)
         probas = torch.sigmoid(outp)
@@ -32,6 +32,7 @@ class SmokerClassifier:
 
 
 class ImageDataset(Dataset):
+    """Image dataset implementation"""
     def __init__(self, files):
         super().__init__()
         self.files = sorted(files)
@@ -41,6 +42,7 @@ class ImageDataset(Dataset):
         return self.len_
 
     def load_sample(self, file):
+        """Loads image"""
         image = Image.open(file)
         image.load()
         return image
@@ -64,6 +66,7 @@ class ImageDataset(Dataset):
 
 
 def main():
+    """Main function"""
     warnings.filterwarnings("ignore")
     parser = argparse.ArgumentParser(description="Smokers predictor")
     parser.add_argument("indir", type=str, help="Input dir with images")
@@ -73,8 +76,8 @@ def main():
     parser.add_argument("weights", type=str, help="Path to model weights")
     args = parser.parse_args()
 
-    IM_DIR = Path(args.indir)
-    files = sorted(list(IM_DIR.rglob("*.jpg")))
+    im_dir = Path(args.indir)
+    files = sorted(list(im_dir.rglob("*.jpg")))
     dataset = ImageDataset(files)
     assert len(dataset) > 0, "Pictures dataset should be not empty"
 
@@ -96,7 +99,7 @@ def main():
     except FileNotFoundError:
         print("Incorrect output path")
         return 1
-
+    return 0
 
 if __name__ == "__main__":
     main()
