@@ -1,21 +1,24 @@
-FROM python:3.9-slim as compiler
-ENV PYTHONUNBUFFERED 1
+FROM ubuntu:latest
+
+
 
 WORKDIR /app
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-COPY requirements.txt .
-RUN pip install --no-cache-dir -Ur requirements.txt
 
+COPY requirements.txt .
+COPY model.py .
+COPY image_converter.cpp .
+COPY Makefile .
+COPY entrypoint/Makefile ./entrypoint/
+
+
+RUN apt-get update && apt-get install -y make 
+RUN make prereqs
+# RUN make build
+#RUN make test
 
 # Копируем весь проект в контейнер
-# пока убрал
-
-FROM python:3.9-slim as runner
-WORKDIR /app/
-COPY --from=compiler /opt/venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-COPY . /app/
+COPY . .
 
 # Команда для запуска скрипта
-CMD ["python3", "model.py", "./tresh", "./out.fuck", "./ft_resnet_10e.pt"]
+WORKDIR /app/entrypoint
+ENTRYPOINT ["make"]
