@@ -24,6 +24,7 @@ Team 8:
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/Owling797/FSE_final_project.git
+   git checkout main
    ```
 
 2. **Navigate to the Project Directory:**
@@ -46,25 +47,24 @@ Team 8:
    docker run -it clasdss
    ```
 
-6. **Run tests:**
-   ```bash
-   docker run -it clasdss
-   ```
-
 ## Auxilary options
-
-1. **To Prerocess data:**
+1. Run tests:
+   ```bash
+   python -m unittest test_main_model.py
+   ```
+   
+2. **To Prerocess data:**
    ```bash
    make Preprocessing
    ```
 
-2. **To Process data:**
+3. **To Process data:**
    ```bash
    make Processing
    ```
    Runs the neural network model on the images.
 
-3. **To Postprocess data:**
+4. **To Postprocess data:**
    ```bash
    make Postprocessing
    ```
