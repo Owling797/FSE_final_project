@@ -1,5 +1,7 @@
 # Prject Smoker Classifier
 
+# Smoking persons classification using pretrained ResNet50
+
 ## Overview
 This project uses a pretrained ResNet model to classify images of smokers. 
 
