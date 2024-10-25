@@ -31,28 +31,36 @@ Team 8:
    cd FSE_final_project
    ```
 
-3. **Build the Docker Image:**
+3. **Install required python packages:**
+   ```bash
+   pip3 install -r requirements.txt  
+   ```
+
+4. **Build the Docker Image:**
    ```bash
    docker build -t clasdss .
    ```
 
-4. **Run the Docker Container:**
+5. **Run the Docker Container:**
    ```bash
    docker run -it clasdss
    ```
 
-5. **To Prerocess data:**
+
+## Auxilary options
+
+1. **To Prerocess data:**
    ```bash
    make Preprocessing
    ```
 
-6. **To Process data:**
+2. **To Process data:**
    ```bash
    make Processing
    ```
    Runs the neural network model on the images.
 
-7. **To Postprocess data:**
+3. **To Postprocess data:**
    ```bash
    make Postprocessing
    ```
