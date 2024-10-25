@@ -32,10 +32,7 @@ Team 8:
    cd FSE_final_project
    ```
 
-3. **Install required python packages:**
-   ```bash
-   pip3 install -r requirements.txt  
-   ```
+3. **Place your images into 'images' directory:**
 
 4. **Build the Docker Image:**
    ```bash
@@ -43,16 +40,19 @@ Team 8:
    ```
 
 5. **Run the Docker Container:**
+   Check where the FSE_final_project is located
    ```bash
-   docker run -it clasdss
+   docker run -it -v <Your full path to FSE_final_project>/FSE_final_project/out/:/app/out/  clasdss
    ```
+
+6. **Check the result in the 'out' directory**
 
 ## Auxilary options
 1. Run tests:
    ```bash
    python -m unittest test_main_model.py
    ```
-   
+
 2. **To Prerocess data:**
    ```bash
    make Preprocessing
