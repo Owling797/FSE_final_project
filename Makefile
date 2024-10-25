@@ -17,27 +17,28 @@ SRC=image_converter.cpp
 prereqs:
 	@echo "Installing system dependencies..."
 	apt-get update && apt-get install -y python3 python3-pip python3-venv
+	#
 
 	@echo "Creating virtual environment..."
 	$(PYTHON) -m venv $(VENV)
 
 	@echo "Installing Python packages from $(REQUIREMENTS)..."
-	$(VENV)/bin/$(PIP) install --no-cache-dir -r $(REQUIREMENTS)
+	. $(VENV)/bin/activate; pip install --no-cache-dir -Ur $(REQUIREMENTS)
 
 
 
-	@if [ ! -d $(OPENCV_DIR) ]; then \
-                echo "Cloning OpenCV repository..."; \
-                git clone https://github.com/opencv/opencv.git; \
-        else \
-                echo "OpenCV repository already exists."; \
-        fi
-	@if [ ! -d $(OPENCV_CONTRIB_DIR) ]; then \
-			echo "Cloning OpenCV contrib repository..."; \
-			git clone https://github.com/opencv/opencv_contrib.git; \
-	else \
-			echo "OpenCV contrib repository already exists."; \
-	fi
+	# @if [ ! -d $(OPENCV_DIR) ]; then \
+    #             echo "Cloning OpenCV repository..."; \
+    #             git clone https://github.com/opencv/opencv.git; \
+    #     else \
+    #             echo "OpenCV repository already exists."; \
+    #     fi
+	# @if [ ! -d $(OPENCV_CONTRIB_DIR) ]; then \
+	# 		echo "Cloning OpenCV contrib repository..."; \
+	# 		git clone https://github.com/opencv/opencv_contrib.git; \
+	# else \
+	# 		echo "OpenCV contrib repository already exists."; \
+	# fi
 
 
 

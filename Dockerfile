@@ -11,9 +11,9 @@ COPY Makefile .
 COPY entrypoint/Makefile ./entrypoint/
 
 
-RUN apt-get update && apt-get install -y make gcc
+RUN apt-get update && apt-get install -y make 
 RUN make prereqs
-RUN make build
+# RUN make build
 #RUN make test
 
 # Копируем весь проект в контейнер

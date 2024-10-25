@@ -1,3 +1,4 @@
-# torch
-# torchvision
-# Pillow
+torch
+torchvision
+pillow
+Image
