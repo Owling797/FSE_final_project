@@ -46,6 +46,10 @@ Team 8:
    docker run -it clasdss
    ```
 
+6. **Run tests:**
+   ```bash
+   docker run -it clasdss
+   ```
 
 ## Auxilary options
 
