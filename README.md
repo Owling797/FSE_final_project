@@ -46,6 +46,10 @@ Team 8:
    ```
 
 6. **Check the result in the 'out' directory**
+   ```bash
+   cd out/out.txt
+   ```
+
 
 ## Auxilary options
 1. Run tests:
