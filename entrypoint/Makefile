@@ -12,10 +12,16 @@ all: Processing
 
 
 Processing: 
-	. ../$(VENV)/bin/activate; python3 ../model.py ../ ../out.pkl ../ft_resnet_10e.pt
+	mkdir -p ../out
+	. ../$(VENV)/bin/activate; python3 ../model.py ../ ../out/out.pkl ../ft_resnet_10e.pt; python3 ../converter.py ../out/out.pkl ../out/out.txt
 
 
-# Postprocessing: python3 main.py predict --input data/input_data.json --output data/output_predictions.json
+# Postprocessing: 
+
+
+
+bash:
+	@/bin/bash
 
 
 clean:        rm -f data/output_predictions.json
