@@ -1,17 +1,29 @@
-TARGET=image_converter
+TARGET=../image_converter
+VENV=my-venv
+
+all: Processing
 
 Preprocessing:
-	$(TARGET)
-	@echo "Running the image converter..."
-	@read -p "Enter input image path: " input && \
-	read -p "Enter output image path (with .jpg extension): " output && \
-	./$(TARGET) $$input $$output
+	 @echo "Running the image converter..."
+		@if [ -z "$(input)" ] || [ -z "$(output)" ]; then \
+				echo "Error: 'input' and 'output' variables are required."; \
+				echo "Usage: make Preprocessing input=<input_image> output=<output_image>"; \
+				exit 1; \
+		else \
+				echo "Using input: $(input)"; \
+				echo "Using output: $(output)"; \
+				./$(TARGET) $(input) $(output); \
+        fi
 
 
-Processing: python3 main.py evaluate
+Processing:
+	. ../$(VENV)/bin/activate; python3 ../model.py ../ ../out.pkl ../ft_resnet_10e.pt
 
 
-Postprocessing: python3 main.py predict --input data/input_data.json --output data/output_predictions.json
+Postprocessing:
 
-==
-clean:        rm -f data/output_predictions.json
+
+bash:
+	@/bin/bash
+
+clean:
