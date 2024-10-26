@@ -4,13 +4,14 @@ on:
   workflow_dispatch: 
   push:
     branches:
-      - '**'
-  #push:     
-  #  branches:
-  #    - main- '**'   
+      - '**'  # Запускается на пуши в любые ветки
+    paths:
+      - Dockerfile  # Запускается только если изменен Dockerfile
   pull_request:
     branches:
       - main
+    paths:
+      - Dockerfile
 
 jobs:
   build-and-test:
