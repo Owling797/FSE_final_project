@@ -4,35 +4,26 @@ VENV=my-venv
 REQUIREMENTS=requirements.txt
 
 
-
-CXX = g++
-CXXFLAGS = -std=c++11 -I./libs/CImg-master -lm -Wall
-
-
 prereqs:
-
-#	@echo "Installing system dependencies..."
-#	apt-get update && apt-get install -y python3 python3-pip python3-venv
-#	#
-#
-#	@echo "Creating virtual environment..."
-#	$(PYTHON) -m venv $(VENV)
-#
-#	@echo "Installing Python packages from $(REQUIREMENTS)..."
-#	. $(VENV)/bin/activate; pip install --no-cache-dir -Ur $(REQUIREMENTS)
+	@echo "Installing system dependencies..."
+	apt-get install -y python3 python3-pip python3-venv golang-go
 
 
+	@echo "Creating virtual environment..."
+	$(PYTHON) -m venv $(VENV)
 
+	ls -l $(VENV)
+	chmod +x $(VENV)/bin/activate
+	ls -l $(VENV)
 
-
+	@echo "Installing Python packages from $(REQUIREMENTS)..."
+	. $(VENV)/bin/activate; pip install --no-cache-dir -Ur $(REQUIREMENTS)
 
 
 
 build:
-	@echo "Current directory is: $(shell pwd)"
-	@ls -l
-	$(CXX) -o image_converter ./src/image_converter.cpp $(CXXFLAGS)
-
+	go build -o image_converter src/image_converter.go
+	go build -o pkl_converter src/pkl_converter.go
 
 
 test: #pavel need to make this
