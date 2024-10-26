@@ -5,14 +5,9 @@ REQUIREMENTS=requirements.txt
 
 
 
-OPENCV_DIR=opencv
-OPENCV_CONTRIB_DIR=opencv_contrib
-BUILD_DIR=build
-CXX=g++
-CXXFLAGS=`pkg-config --cflags opencv4`
-LDFLAGS=`pkg-config --libs opencv4`
-TARGET=image_converter
-SRC=image_converter.cpp
+
+CXX = g++
+CXXFLAGS = -std=c++11 -I./libs/CImg-master -lm -Wall
 
 prereqs:
 	@echo "Installing system dependencies..."
@@ -42,20 +37,10 @@ prereqs:
 
 
 
-
 build:
-	@echo "Building OpenCV..."
-	@if [ ! -d $(BUILD_DIR) ]; then \
-			mkdir $(BUILD_DIR); \
-	fi
-	cd $(BUILD_DIR) && cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=../$(OPENCV_CONTRIB_DIR)/modules ../$(OPENCV_DIR) && \
-	make -j$(nproc) && \
-	sudo make install
-
-
-	$(TARGET): $(SRC)
-			@echo "Building the C++ image converter..."
-			$(CXX) -o $(TARGET) $(SRC) $(CXXFLAGS) $(LDFLAGS)
+	@echo "Current directory is: $(shell pwd)"
+	@ls -l
+	$(CXX) -o image_converter ./src/image_converter.cpp $(CXXFLAGS)
 
 
 test: #pavel need to make this
