@@ -6,7 +6,7 @@ VENV=my-venv
 all: help
 
 preprocessing:
-	 @echo "Running the image converter..."
+	@echo "Running the image converter..."
 		@if [ -z "$(input)" ] || [ -z "$(output)" ]; then \
 				echo "Error: 'input' and 'output' variables are required."; \
 				echo "Usage: make preprocessing input=<.png or .jpg or .gif> output=<.jpg>"; \
@@ -22,7 +22,7 @@ preprocessing:
 
 
 processing:
-  mkdir -p ../out
+	mkdir -p ../out
 	. ../$(VENV)/bin/activate; python3 ../model.py ../images ../out.pkl ../ft_resnet_10e.pt
 
 
