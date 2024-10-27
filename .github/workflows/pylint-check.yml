@@ -26,8 +26,8 @@ jobs:
       - name: Run Pylint
         id: pylint
         run: |
-          find . -name "*.py" > pylint_files.txt
-          pylint $(cat pylint_files.txt) --output-format=actions > pylint_report.txt || true
+          find . -type f -name "*.py" ! -path '*/.*' > pylint_files.txt
+          pylint $(cat pylint_files.txt) --output-format=text > pylint_report.txt || true
           
       - name: Check Pylint score
         run: |
