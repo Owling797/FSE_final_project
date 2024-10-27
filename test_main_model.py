@@ -6,7 +6,7 @@ from io import StringIO
 
 class TestMainModel(unittest.TestCase):    
     
-    @mock.patch('sys.argv', ['model.py', './tresh', './out/re.fuck', './ft_resnet_10e.pt'])
+    @mock.patch('sys.argv', ['model.py', './images', './out/re.fuck', './ft_resnet_10e.pt'])
     @mock.patch('sys.stdout', new_callable=StringIO)
     def test_valid_input(self, mock_stdout, ):
         main()
@@ -19,14 +19,14 @@ class TestMainModel(unittest.TestCase):
             main()
             
             
-    @mock.patch('sys.argv', ['model.py', './tresh', './out/re.fuck', './ft_resnet_10e.pttx'])
+    @mock.patch('sys.argv', ['model.py', './images', './out/re.fuck', './ft_resnet_10e.pttx'])
     @mock.patch('sys.stdout', new_callable=StringIO)
     def test_invalid_weights_file(self, mock_stdout):
         main()
         self.assertEqual(mock_stdout.getvalue(), "Incorrect weights path\n")
         
         
-    @mock.patch('sys.argv', ['model.py', './tresh', './o/u/t/r/e/./f/u/c/k', './ft_resnet_10e.pt'])
+    @mock.patch('sys.argv', ['model.py', './images', './o/u/t/r/e/./f/u/c/k', './ft_resnet_10e.pt'])
     @mock.patch('sys.stdout', new_callable=StringIO)
     def test_invalid_output_file(self, mock_stdout):
         main()
