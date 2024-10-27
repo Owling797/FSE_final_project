@@ -102,6 +102,7 @@ If you're using Ubuntu, you're able to build and run this project without Docker
 
    
    ```bash
+   cd entrypoint
    make all input=<path to your image> output=<path to converted image> input_dir=<path to stored converted images> result_file=<path to json result>
    ```
 
@@ -147,7 +148,7 @@ All paths must be relative to directory entrypoint
    docker run -it clasdss postprocessing result_file=<path to json result>
    ```
    ![alt text](screenshots/image-4.png)
-   
+
   Analyzes the output from the neural network 
 
 4. **Run tests**:
