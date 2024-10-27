@@ -44,6 +44,7 @@ build:
 
 
 test: #pavel need to make this
+	. $(VENV)/bin/activate; python3 -m unittest test_main_model.py
 
 
 clean:
