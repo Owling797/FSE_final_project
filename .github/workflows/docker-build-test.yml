@@ -3,10 +3,8 @@ name: Docker Build and Test
 on:
   workflow_dispatch: 
   push:
-    branches:
-      - '**'  # Запускается на пуши в любые ветки
-    paths:
-      - Dockerfile  # Запускается только если изменен Dockerfile
+    branches: 
+      - '**' #[main]
   pull_request:
     branches:
       - main
@@ -26,7 +24,7 @@ jobs:
 
       - name: Build prerequisites
         run: |
-          make prereqs
+          sudo make prereqs
 
       - name: Build the Docker image
         run: |
