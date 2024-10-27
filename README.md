@@ -10,7 +10,7 @@ By team 8:
 ## Overview
 This project uses a pretrained ResNet model to classify images of smokers. 
 
-From images to probabilities of smoking persons in them:
+From images to probabilities of smoking persons:
 
 * prob: 0.02
 
