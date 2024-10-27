@@ -3,3 +3,4 @@ torchvision
 pillow
 Image
 opencv-python
+numpy

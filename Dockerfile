@@ -1,13 +1,10 @@
 FROM ubuntu:latest
 
-
-
 WORKDIR /app
 
 COPY . .
 
-
-RUN apt-get update && apt-get install -y --no-install-recommends make g++ #git
+RUN apt-get update && apt-get install -y --no-install-recommends make g++ 
 RUN make prereqs
 RUN make build
 RUN make test
