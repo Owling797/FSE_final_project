@@ -11,7 +11,7 @@ CXXFLAGS = -std=c++11 -I./libs/CImg-master -lm -Wall
 
 prereqs:
 	@echo "Installing system dependencies..."
-	apt-get update && apt-get install -y python3 python3-pip python3-venv
+	sudo apt-get update && apt-get install -y python3 python3-pip python3-venv
 	#
 
 	@echo "Creating virtual environment..."

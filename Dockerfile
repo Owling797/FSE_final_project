@@ -15,4 +15,3 @@ RUN make build
 
 WORKDIR /app/entrypoint
 ENTRYPOINT ["make"]
-
