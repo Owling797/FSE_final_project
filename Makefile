@@ -30,8 +30,13 @@ build:
 
 
 test: #pavel need to make this
+	@echo testing image converter
+	./image_converter test.png test.jpg
+	. $(VENV)/bin/activate; python3 -m test_preproc
+	@echo testing model
 	. $(VENV)/bin/activate; python3 -m unittest test_main_model.py
-
+	@echo testing postprocessing
+	cd ./src && . ../$(VENV)/bin/activate; python3 -m unittest test_decoder && cd ..
 
 clean:
 	@echo "Cleaning up..."

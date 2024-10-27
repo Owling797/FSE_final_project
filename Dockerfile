@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install -y --no-install-recommends make g++ 
+RUN apt-get update && apt-get install -y --no-install-recommends make 
 RUN make prereqs
 RUN make build
 RUN make test

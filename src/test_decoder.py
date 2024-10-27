@@ -9,7 +9,7 @@ from decoder import main
 class TestDecoder(unittest.TestCase):
     """Unittest class"""
 
-    @mock.patch("sys.argv", ["decoder.py", "../out/res.pkl", "../out/res.json"])
+    @mock.patch("sys.argv", ["decoder.py", "../out/test.pkl", "../out/test.json"])
     @mock.patch("sys.stdout", new_callable=StringIO)
     def test_valid_input(
         self,
@@ -19,7 +19,7 @@ class TestDecoder(unittest.TestCase):
         main()
         self.assertEqual(
             mock_stdout.getvalue(),
-            "Conversion complete: ../out/res.pkl -> ../out/res.json\n",
+            "Conversion complete: ../out/test.pkl -> ../out/test.json\n",
         )
 
     @mock.patch("sys.argv", ["decoder.py"])
@@ -32,7 +32,7 @@ class TestDecoder(unittest.TestCase):
             "Usage: python convert_pickle_to_json.py <input_pickle_file> <output_json_file>\n",
         )
 
-    @mock.patch("sys.argv", ["decoder.py", "../out/res.pikl", "../out/res.json"])
+    @mock.patch("sys.argv", ["decoder.py", "../out/test.pikl", "../out/test.json"])
     @mock.patch("sys.stdout", new_callable=StringIO)
     def test_invalid_input(self, mock_stdout):
         """Tests invalid input path processing"""
@@ -44,7 +44,7 @@ class TestDecoder(unittest.TestCase):
 
     @mock.patch(
         "sys.argv",
-        ["decoder.py", "../out/res.pkl", "../out/res.jason"],
+        ["decoder.py", "../out/test.pkl", "../out/test.jason"],
     )
     @mock.patch("sys.stdout", new_callable=StringIO)
     def test_invalid_output_file(self, mock_stdout):
