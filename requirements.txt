@@ -1,4 +1,6 @@
-# torch
-# torchvision
-# Pillow
+torch
+torchvision
+pillow
+Image
+opencv-python
 numpy

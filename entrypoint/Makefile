@@ -20,8 +20,10 @@ preprocessing:
         fi
 
 
+
 processing:
-	. ../$(VENV)/bin/activate; python3 ../model.py ../ ../out.pkl ../ft_resnet_10e.pt
+  mkdir -p ../out
+	. ../$(VENV)/bin/activate; python3 ../model.py ../images ../out.pkl ../ft_resnet_10e.pt
 
 
 postprocessing:

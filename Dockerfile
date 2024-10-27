@@ -4,15 +4,11 @@ WORKDIR /app
 
 COPY . .
 
-RUN apt-get update && apt-get install -y --no-install-recommends make
+RUN apt-get update && apt-get install -y --no-install-recommends make g++ 
 RUN make prereqs
 RUN make build
-#RUN make test
-
-# Копируем весь проект в контейнер
+RUN make test
 
 
-# Команда для запуска скрипта
 WORKDIR /app/entrypoint
 ENTRYPOINT ["make"]
-

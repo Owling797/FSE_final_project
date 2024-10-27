@@ -1,0 +1,40 @@
+name: Pylint Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint pylint-actions 
+          
+      - name: Run Pylint
+        id: pylint
+        run: |
+          find . -type f -name "*.py" ! -path '*/.*' > pylint_files.txt
+          pylint $(cat pylint_files.txt) --output-format=text > pylint_report.txt || true
+          
+      - name: Check Pylint score
+        run: |
+          score=$(grep -oP 'Your code has been rated at \K[0-9]*\.[0-9]*' pylint_report.txt)
+          if (( $(echo "$score < 6" | bc -l) )); then
+            echo "Pylint score is below 6/10. Please improve your code quality."
+            exit 1
+          else
+            echo "Pylint score is $score/10. Good job!"
+          fi
