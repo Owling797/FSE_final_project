@@ -5,7 +5,7 @@ PYTHON=python3
 MODEL_OUT=../out/out.pkl
 VENV=my-venv
 
-all: help
+all: preprocessing processing postprocessing
 
 preprocessing:
 	 @echo "Running the image converter..."
@@ -25,17 +25,16 @@ preprocessing:
 
 processing:
 	 @echo "Running processing"
-		@if [ -z "$(input)" ]; then \
+		@if [ -z "$(input_dir)" ]; then \
 				echo "Error: 'input' variable is required."; \
 				echo "Usage: make processing input=<.jpg> output=<.pkl>"; \
 				echo "By default dir is '/app/entrypoint' !"; \
 				exit 1; \
 		else \
-
-				echo "Using input: $(input)"; \
+				echo "Using input: $(input_dir)"; \
 				echo "Using output: $(MODEL_OUT)"; \
 				mkdir -p ../out; \
-				. ../$(VENV)/bin/activate; $(PYTHON) $(MODEL) $(input) $(MODEL_OUT) ../ft_resnet_10e.pt; \
+				. ../$(VENV)/bin/activate; $(PYTHON) $(MODEL) $(input_dir) $(MODEL_OUT) ../ft_resnet_10e.pt; \
         fi
   
 	
@@ -60,7 +59,7 @@ help:
 	@echo "help"
 	@echo "bash"
 	@echo "preprocessing input=<.png or .jpg or .gif> output=<.jpg>"
-	@echo "processing input=<.pkl> output=<.pt>"
+	@echo "processing input=<.jpg> output=<.pkl>"
 	@echo "postprocessing input=<.pkl> output=<.json>"
 
 bash:
