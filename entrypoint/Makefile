@@ -1,6 +1,8 @@
 IMG_CONV_EXE=../image_converter
 PKL_CONV_EXE=../pkl_converter
-
+MODEL=../model.py
+PYTHON=python3
+MODEL_OUT=../out/out.pkl
 VENV=my-venv
 
 all: help
@@ -22,12 +24,25 @@ preprocessing:
 
 
 processing:
-  mkdir -p ../out
-	. ../$(VENV)/bin/activate; python3 ../model.py ../images ../out.pkl ../ft_resnet_10e.pt
+	 @echo "Running processing"
+		@if [ -z "$(input)" ]; then \
+				echo "Error: 'input' variable is required."; \
+				echo "Usage: make processing input=<.jpg> output=<.pkl>"; \
+				echo "By default dir is '/app/entrypoint' !"; \
+				exit 1; \
+		else \
+
+				echo "Using input: $(input)"; \
+				echo "Using output: $(MODEL_OUT)"; \
+				mkdir -p ../out; \
+				. ../$(VENV)/bin/activate; $(PYTHON) $(MODEL) $(input) $(MODEL_OUT) ../ft_resnet_10e.pt; \
+        fi
+  
+	
 
 
 postprocessing:
-	@echo "Running the image converter..."
+	@echo "Running the output converter..."
 		@if [ -z "$(input)" ] || [ -z "$(output)" ]; then \
 				echo "Error: 'input' and 'output' variables are required."; \
 				echo "Usage: make postprocessing input=<.pkl> output=<.json>" ; \
