@@ -8,7 +8,7 @@ VENV=my-venv
 all: preprocessing processing postprocessing
 
 preprocessing:
-	 @echo "Running the image converter..."
+	@echo "Running the image converter..."
 		@if [ -z "$(input)" ] || [ -z "$(output)" ]; then \
 				echo "Error: 'input' and 'output' variables are required."; \
 				echo "Usage: make preprocessing input=<.png or .jpg or .gif> output=<.jpg>"; \
@@ -37,7 +37,7 @@ processing:
 				. ../$(VENV)/bin/activate; $(PYTHON) $(MODEL) $(input_dir) $(MODEL_OUT) ../ft_resnet_10e.pt; \
         fi
   
-	
+
 
 
 postprocessing:

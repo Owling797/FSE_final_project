@@ -2,10 +2,15 @@
 
 Smoking persons classification using pretrained ResNet50
 
+By team 8:
+* Svetlana Lukina
+* Lyudmila Zavadskaya
+* Pavel Gurevich
+* Nikita Vybornov
 ## Overview
 This project uses a pretrained ResNet model to classify images of smokers. 
 
-From images to probabilities of smoking persons in them:
+From images to probabilities of smoking persons:
 
 * prob: 0.02
 
@@ -14,13 +19,6 @@ From images to probabilities of smoking persons in them:
 * prob: 0.78
 
   <img width="247" alt="image" src="https://github.com/user-attachments/assets/13b5c12e-bed4-4863-a5f0-1a143e290f17">
-
-
-Team 8:
-* Svetlana Lukina
-* Lyudmila Zavadskaya
-* Pavel Gurevich
-* Nikita Vybornov
   
 
 ## Requirements
@@ -68,24 +66,44 @@ Team 8:
 
 
 ## Auxilary options
-1. Run tests:
+
+1. **To Prerocess data:**
+
+All paths must be relative to directory entrypoint
+   ```bash
+   make preprocessing input=<path to your image> output=<path to the result>
+   ```
+   or outside the container:
+   ```bash
+   docker run -it clasdss preprocessing input=<path to your image> output=<path to the result>
+   ``` 
+   ![alt text](screenshots/image-2.png)
+
+
+2. **To Process data:**
+   ```bash
+   make processing
+   ```
+   or outside the container:
+   ```bash
+   docker run -it clasdss processing 
+   ``` 
+   ![alt text](screenshots/image-3.png)
+   Runs the neural network model on the images.
+
+3. **To Postprocess data:**
+   ```bash
+   make postprocessing input=<path to the model output (.pkl)> output=<path to the result (.json)>
+   ```
+   or outside the container:
+   ```bash
+   docker run -it clasdss postprocessing input=<path to the model output (.pkl)> output=<path to the result (.json)>
+   ```
+   ![alt text](screenshots/image-4.png)
+  Analyzes the output from the neural network 
+
+4. **Run tests**:
    ```bash
    python -m unittest test_main_model.py
    ```
-
-2. **To Prerocess data:**
-   ```bash
-   make Preprocessing
-   ```
-
-3. **To Process data:**
-   ```bash
-   make Processing
-   ```
-   Runs the neural network model on the images.
-
-4. **To Postprocess data:**
-   ```bash
-   make Postprocessing
-   ```
-  Analyzes the output from the neural network 
+   ![alt text](screenshots/image-1.png)
