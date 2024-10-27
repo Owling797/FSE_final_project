@@ -23,12 +23,17 @@ class SmokerClassifier:
         self.model.load_state_dict(load)
         self.model.eval()
 
-    def predict(self, images: torch.tensor) -> float:
+    def predict_proba(self, images: torch.tensor) -> float:
         """Returns probability of Smoker class"""
         with torch.no_grad():
             outp = self.model(images)
         probas = torch.sigmoid(outp)
         return probas
+
+    def predict(self, images: torch.tensor) -> float:
+        """Returns label of Smoker class"""
+        probas = self.predict_proba(images)
+        return torch.round(probas)
 
 
 class ImageDataset(Dataset):
@@ -89,7 +94,7 @@ def main():
     loader = DataLoader(dataset, batch_size=len(dataset), shuffle=False)
 
     for inputs in loader:
-        preds = model.predict(inputs).detach().numpy()
+        preds = model.predict_proba(inputs).detach().numpy()
     res_dict = {}
     for file, pred in zip(files, preds):
         res_dict[str(file)] = pred
