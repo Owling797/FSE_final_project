@@ -7,6 +7,8 @@ By team 8:
 * Lyudmila Zavadskaya
 * Pavel Gurevich
 * Nikita Vybornov
+
+
 ## Overview
 This project uses a pretrained ResNet model to classify images of smokers. 
 
@@ -40,7 +42,9 @@ From images to probabilities of smoking persons:
    cd FSE_final_project
    ```
 
-3. **Place your images into 'images' directory:**
+3. **Place your images into some directory:**
+
+### Setup using Docker 
 
 4. **Build the Docker Image:**
    ```bash
@@ -50,19 +54,61 @@ From images to probabilities of smoking persons:
 
 
 5. **Run the Docker Container:**
-   Check where the FSE_final_project is located
+
+   First:
+   * Find the path to your image (you can find some examples in the "image" directory)
+   * Decide where to place the converted image
+   * Decide where to place json result
+   
+   All your paths must be relative to directory "entrypoint"
+
+   
    ```bash
-   docker run -it -v <Your full path to FSE_final_project>/FSE_final_project/out/:/app/out/  clasdss
+   docker run -t -v <Your full path to FSE_final_project>/FSE_final_project/out/:/app/out/ clasdss input=<path to your image> output=<path to converted image> input_dir=<path to stored converted images directory> result_file=<path to json result>
    ```
-   <img width="993" alt="image" src="https://github.com/user-attachments/assets/668a42b8-2aae-4c02-a547-92356a3677eb">
+   ![alt text](screenshots/image-build.png)
 
 
-6. **Check the result in the 'out' directory**
+6. **Check the result**
    ```bash
-   cat out/out.txt
+   cat <path to your json result>
    ```
-   <img width="482" alt="image" src="https://github.com/user-attachments/assets/aab77d1b-88ff-4902-b002-c0725b24bcfb">
+   ![alt text](screenshots/image-cat.jpg)
 
+   The entire process:
+   ![alt text](screenshots/image-all.jpg)
+
+
+
+### Setup using Makefiles
+
+If you're using Ubuntu, you're able to build and run this project without Docker. Here is the instruction how to do it
+
+4. **Build the project**
+   ```bash
+   make prereqs
+   make build
+   make test
+   ```
+
+5. **Run the software**
+
+   First:
+   * Find the path to your image (you can find some examples in the "image" directory)
+   * Decide where to place the converted image
+   * Decide where to place json result
+   
+   All your paths must be relative to directory "entrypoint"
+
+   
+   ```bash
+   make all input=<path to your image> output=<path to converted image> input_dir=<path to stored converted images> result_file=<path to json result>
+   ```
+
+6. **Check the result**
+   ```bash
+   cat <path to your json result>
+   ```
 
 
 ## Auxilary options
@@ -82,24 +128,26 @@ All paths must be relative to directory entrypoint
 
 2. **To Process data:**
    ```bash
-   make processing
+   make processing input_dir<path to stored converted images>
    ```
    or outside the container:
    ```bash
-   docker run -it clasdss processing 
+   docker run -it clasdss processing input_dir<path to stored converted images>
    ``` 
    ![alt text](screenshots/image-3.png)
+
    Runs the neural network model on the images.
 
 3. **To Postprocess data:**
    ```bash
-   make postprocessing input=<path to the model output (.pkl)> output=<path to the result (.json)>
+   make postprocessing result_file=<path to json result>
    ```
    or outside the container:
    ```bash
-   docker run -it clasdss postprocessing input=<path to the model output (.pkl)> output=<path to the result (.json)>
+   docker run -it clasdss postprocessing result_file=<path to json result>
    ```
    ![alt text](screenshots/image-4.png)
+   
   Analyzes the output from the neural network 
 
 4. **Run tests**:
