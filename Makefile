@@ -29,7 +29,7 @@ build:
 
 
 
-test: #pavel need to make this
+test:
 	. $(VENV)/bin/activate; python3 -m unittest test_main_model.py
 
 

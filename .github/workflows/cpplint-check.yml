@@ -3,7 +3,7 @@ name: Cppcheck CI
 on: [push]
 
 jobs:
-  cppcheck:
+  optional-job-cppcheck:
     runs-on: ubuntu-latest
 
     steps:
